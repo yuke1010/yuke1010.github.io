@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yuke1010 | Projects</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="site-title">yuke1010</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Projects</h1>
+      <p class="subtitle">Selected coursework and data analysis projects.</p>
+    </section>
+
+    <section class="section">
+      <div class="card project-card">
+        <h2>Survival Analysis on Telco Customer Churn Data</h2>
+        <p class="meta">Tools: PySpark, pandas, lifelines, MySQL</p>
+        <p>
+          In this project, I followed the official survival analysis tutorial and implemented a full
+          workflow including data preprocessing, Kaplan–Meier survival estimation, Cox proportional hazards
+          modeling, and Accelerated Failure Time model comparison.
+        </p>
+        <p>
+          The analysis focused on customer churn as a time-to-event problem and showed that service-related
+          features such as online backup and tech support were strongly associated with lower churn risk.
+        </p>
+      </div>
+
+      <div class="card project-card">
+        <h2>Text-to-SQL Error Analysis with LLMs</h2>
+        <p class="meta">Tools: MySQL, Python, SiliconFlow API, Qwen2.5-7B-Instruct</p>
+        <p>
+          I constructed a MySQL database from the Telco Customer Churn dataset and tested whether an LLM
+          could generate correct SQL from natural language questions. The experiment included both successful
+          cases and failure cases.
+        </p>
+        <p>
+          The results showed that LLMs can handle some simple aggregation queries, but may fail due to
+          schema misunderstanding, malformed structured output, or incorrect subgroup aggregation logic.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 yuke1010</p>
+    </div>
+  </footer>
+</body>
+</html>
