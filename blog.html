@@ -25,62 +25,60 @@
       <h1>Survival Analysis and Text-to-SQL Experiments on Telco Customer Churn Data</h1>
       <p class="meta">By yuke1010 | Statistics and Data Science</p>
 
-      <h2>Background</h2>
+      <h2>Project Background</h2>
       <p>
-        This project investigates customer churn from two complementary perspectives.
-        First, I treated churn as a time-to-event problem and applied survival analysis methods.
-        Second, I constructed a MySQL database and evaluated whether an LLM could generate correct SQL
-        for analytical questions.
+        In this project, I studied the Telco Customer Churn dataset from two complementary perspectives.
+        First, I treated customer churn as a time-to-event problem and applied survival analysis methods.
+        Second, I built a MySQL database and tested whether an LLM could generate correct SQL for analytical questions.
       </p>
 
-      <h2>Dataset</h2>
+      <h2>Dataset and Objective</h2>
       <p>
-        The analysis used the IBM Telco Customer Churn dataset. The original dataset contains 7043 records.
-        For the survival analysis section, I followed the official tutorial and focused on customers with
-        month-to-month contracts and active internet service.
+        The original dataset contains 7043 customer records. In the survival analysis part, I followed the
+        official tutorial and focused on customers with month-to-month contracts and active internet service.
+        The main objective was to understand how customer retention changes over time and which service-related
+        factors are associated with higher or lower churn risk.
       </p>
 
-      <h2>Survival Analysis</h2>
+      <h2>Survival Analysis Results</h2>
       <p>
-        I implemented Kaplan–Meier estimation, Cox proportional hazards modeling, and several AFT models.
-        The Kaplan–Meier curve showed a clear decline in retention probability as customer tenure increased.
-        The overall median survival time in the filtered subgroup was about 34 months.
+        I implemented Kaplan–Meier estimation, Cox proportional hazards modeling, and Accelerated Failure Time (AFT) models.
+        The Kaplan–Meier analysis showed that the overall retention probability decreases steadily with tenure.
+        In the filtered subgroup, the estimated median survival time was about 34 months.
       </p>
       <p>
-        The Cox model indicated that variables such as online backup and tech support were associated with
-        lower churn hazard, while paperless billing was associated with slightly higher churn risk. I also
-        compared Weibull, Log-Normal, and Log-Logistic AFT models, and the Log-Normal model achieved the
-        best fit according to AIC.
+        The Cox model showed that online backup and tech support were strongly associated with lower churn hazard,
+        while paperless billing was associated with slightly higher churn risk. I also compared Weibull, Log-Normal,
+        and Log-Logistic AFT models, and found that the Log-Normal AFT model achieved the best fit according to AIC.
       </p>
 
       <h2>Text-to-SQL Experiments</h2>
       <p>
-        I then built a MySQL database and tested LLM-generated SQL queries. The model was able to answer
-        some simple questions correctly, such as grouped averages and grouped counts. However, it also failed
-        on more complicated tasks.
+        In the second part of the project, I created a MySQL database and evaluated whether an LLM could generate
+        correct SQL from natural language questions. The model successfully handled some simple aggregation tasks,
+        but it also failed on more complex analytical queries.
       </p>
       <p>
-        The failure cases revealed several typical problems:
+        Three representative failure patterns were observed:
       </p>
       <ul>
-        <li>misunderstanding the value semantics of categorical columns,</li>
-        <li>generating corrupted or unstable structured output for complex analytical SQL,</li>
-        <li>using an incorrect subgroup baseline in nested aggregation queries.</li>
+        <li>misunderstanding the semantics of categorical values,</li>
+        <li>producing corrupted or unstable structured SQL output,</li>
+        <li>using incorrect subgroup baselines in nested aggregation queries.</li>
       </ul>
 
-      <h2>Reflection</h2>
+      <h2>What I Learned</h2>
       <p>
-        These experiments show that LLMs can be useful assistants for drafting SQL, but they should not be
-        treated as fully reliable analytical tools without human verification. On the other hand, survival
-        analysis provides a principled statistical framework for understanding churn over time and gives more
-        interpretable results than a simple binary view of churn.
+        This project helped me understand that statistical modeling and LLM-assisted data analysis serve different roles.
+        Survival analysis offers an interpretable framework for understanding customer churn over time, while LLMs can help
+        draft SQL queries but still require careful human verification.
       </p>
 
       <h2>Conclusion</h2>
       <p>
-        Overall, this project combined statistical modeling, database construction, and LLM-based query
-        generation in one workflow. It helped me better understand both the strengths and limitations of
-        modern data analysis pipelines.
+        Overall, this project combined survival analysis, database construction, and text-to-SQL evaluation in one workflow.
+        It showed both the value of formal statistical methods and the practical limitations of current LLMs in structured
+        analytical tasks.
       </p>
     </article>
   </main>
