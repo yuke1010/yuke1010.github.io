@@ -40,181 +40,186 @@
         factors are associated with higher or lower churn risk.
       </p>
 
-      <h2>Survival Analysis Results</h2>
-      <p>
-        I implemented Kaplan–Meier estimation, Cox proportional hazards modeling, and Accelerated Failure Time (AFT) models.
-        The Kaplan–Meier analysis showed that the overall retention probability decreases steadily with tenure.
-        In the filtered subgroup, the estimated median survival time was about 34 months.
-      </p>
-      <p>
-        The Cox model showed that online backup and tech support were strongly associated with lower churn hazard,
-        while paperless billing was associated with slightly higher churn risk. I also compared Weibull, Log-Normal,
-        and Log-Logistic AFT models, and found that the Log-Normal AFT model achieved the best fit according to AIC.
-      </p>
       <section>
-  <h2>Dataset and Preprocessing</h2>
-  <p>
-    The original IBM Telco Customer Churn dataset contains 7,043 customer records.
-    In this survival analysis, customer churn was treated as the event of interest,
-    and customer tenure was treated as the survival duration measured in months.
-    Following the official tutorial, I focused on customers with month-to-month contracts
-    and active internet service.
-  </p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Original records</td>
-        <td>7,043</td>
-      </tr>
-      <tr>
-        <td>Filtered analysis sample</td>
-        <td>3,351</td>
-      </tr>
-      <tr>
-        <td>Churn events</td>
-        <td>1,556</td>
-      </tr>
-      <tr>
-        <td>Right-censored observations</td>
-        <td>1,795</td>
-      </tr>
-      <tr>
-        <td>Time variable</td>
-        <td>tenure</td>
-      </tr>
-      <tr>
-        <td>Event variable</td>
-        <td>churn_num</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<section>
-  <h2>Kaplan-Meier Survival Analysis</h2>
-  <p>
-    I first used the Kaplan-Meier estimator to describe the overall retention pattern.
-    The survival curve shows that customer retention decreases steadily as tenure increases.
-    In the filtered subgroup, the estimated median survival time was approximately
-    <strong>34 months</strong>.
-  </p>
-
-  <figure>
-    <img src="figs/km_overall.png" alt="Overall Kaplan-Meier survival curve">
-    <figcaption>Overall Kaplan-Meier survival curve.</figcaption>
-  </figure>
-
-  <p>
-    I also compared survival curves across service-related groups. Customers with online
-    security showed a clearly higher survival probability than customers without online
-    security, suggesting that service protection features are associated with longer
-    customer retention.
-  </p>
-
-  <figure>
-    <img src="figs/km_online_security.png" alt="Kaplan-Meier curves by online security">
-    <figcaption>Kaplan-Meier survival curves by online security status.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <h2>Cox Proportional Hazards Model</h2>
-  <p>
-    The Cox proportional hazards model was used to estimate how customer features affect
-    the instantaneous risk of churn. The model achieved a concordance index of about
-    <strong>0.643</strong>, indicating moderate predictive discrimination.
-  </p>
-
-  <p>
-    The results show that <strong>online backup</strong> and <strong>tech support</strong>
-    were associated with substantially lower churn hazard, while
-    <strong>paperless billing</strong> was associated with a slightly higher churn hazard.
-    In other words, service support variables appear to be more important than basic
-    demographic variables in explaining churn risk.
-  </p>
-
-  <figure>
-    <img src="figs/cox_hazard_ratios.png" alt="Cox model hazard ratios">
-    <figcaption>Cox model hazard ratios with 95% confidence intervals.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <h2>Accelerated Failure Time Models</h2>
-  <p>
-    To complement the Cox model, I fitted three parametric Accelerated Failure Time models:
-    Weibull AFT, Log-Normal AFT, and Log-Logistic AFT. These models describe how covariates
-    accelerate or decelerate the expected survival time instead of directly modeling the
-    hazard ratio.
-  </p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>AFT Model</th>
-        <th>AIC</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Log-Normal AFT</td>
-        <td>14126.90</td>
-      </tr>
-      <tr>
-        <td>Log-Logistic AFT</td>
-        <td>14201.88</td>
-      </tr>
-      <tr>
-        <td>Weibull AFT</td>
-        <td>14215.99</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>
-    Since a smaller AIC indicates a better fit, the Log-Normal AFT model performed best
-    among the three candidates. The AFT results were broadly consistent with the Cox model:
-    online backup and tech support were associated with longer customer survival time.
-  </p>
-
-  <figure>
-    <img src="figs/aft_survival_curves.png" alt="Predicted survival curves from AFT models">
-    <figcaption>Predicted survival curves from Weibull, Log-Normal, and Log-Logistic AFT models.</figcaption>
-  </figure>
-</section>
-
-<section>
-  <h2>Main Findings</h2>
-  <ul>
-    <li>The median customer survival time in the filtered subgroup was about 34 months.</li>
-    <li>Service-related variables such as online backup, online security, and tech support were strongly associated with customer retention.</li>
-    <li>Paperless billing was associated with a slightly higher churn risk in the Cox model.</li>
-    <li>The Cox model provided interpretable hazard ratios, while AFT models provided a complementary time-ratio perspective.</li>
-    <li>Among the tested AFT models, the Log-Normal AFT model achieved the lowest AIC.</li>
-  </ul>
-</section>
+      <h2>Dataset and Preprocessing</h2>
+      <p>
+        The original IBM Telco Customer Churn dataset contains 7,043 customer records.
+        In this survival analysis, customer churn was treated as the event of interest,
+        and customer tenure was treated as the survival duration measured in months.
+        Following the official tutorial, I focused on customers with month-to-month contracts
+        and active internet service.
+      </p>
+    
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Original records</td>
+            <td>7,043</td>
+          </tr>
+          <tr>
+            <td>Filtered analysis sample</td>
+            <td>3,351</td>
+          </tr>
+          <tr>
+            <td>Churn events</td>
+            <td>1,556</td>
+          </tr>
+          <tr>
+            <td>Right-censored observations</td>
+            <td>1,795</td>
+          </tr>
+          <tr>
+            <td>Time variable</td>
+            <td>tenure</td>
+          </tr>
+          <tr>
+            <td>Event variable</td>
+            <td>churn_num</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <section>
+      <h2>Kaplan-Meier Survival Analysis</h2>
+      <p>
+        I first used the Kaplan-Meier estimator to describe the overall retention pattern.
+        The survival curve shows that customer retention decreases steadily as tenure increases.
+        In the filtered subgroup, the estimated median survival time was approximately
+        <strong>34 months</strong>.
+      </p>
+    
+      <figure>
+        <img src="figs/km_overall.png" alt="Overall Kaplan-Meier survival curve">
+        <figcaption>Overall Kaplan-Meier survival curve.</figcaption>
+      </figure>
+    
+      <p>
+        I also compared survival curves across service-related groups. Customers with online
+        security showed a clearly higher survival probability than customers without online
+        security, suggesting that service protection features are associated with longer
+        customer retention.
+      </p>
+    
+      <figure>
+        <img src="figs/km_online_security.png" alt="Kaplan-Meier curves by online security">
+        <figcaption>Kaplan-Meier survival curves by online security status.</figcaption>
+      </figure>
+    </section>
+    
+    <section>
+      <h2>Cox Proportional Hazards Model</h2>
+      <p>
+        The Cox proportional hazards model was used to estimate how customer features affect
+        the instantaneous risk of churn. The model achieved a concordance index of about
+        <strong>0.643</strong>, indicating moderate predictive discrimination.
+      </p>
+    
+      <p>
+        The results show that <strong>online backup</strong> and <strong>tech support</strong>
+        were associated with substantially lower churn hazard, while
+        <strong>paperless billing</strong> was associated with a slightly higher churn hazard.
+        In other words, service support variables appear to be more important than basic
+        demographic variables in explaining churn risk.
+      </p>
+    
+      <figure>
+        <img src="figs/cox_hazard_ratios.png" alt="Cox model hazard ratios">
+        <figcaption>Cox model hazard ratios with 95% confidence intervals.</figcaption>
+      </figure>
+    </section>
+    
+    <section>
+      <h2>Accelerated Failure Time Models</h2>
+      <p>
+        To complement the Cox model, I fitted three parametric Accelerated Failure Time models:
+        Weibull AFT, Log-Normal AFT, and Log-Logistic AFT. These models describe how covariates
+        accelerate or decelerate the expected survival time instead of directly modeling the
+        hazard ratio.
+      </p>
+    
+      <table>
+        <thead>
+          <tr>
+            <th>AFT Model</th>
+            <th>AIC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Log-Normal AFT</td>
+            <td>14126.90</td>
+          </tr>
+          <tr>
+            <td>Log-Logistic AFT</td>
+            <td>14201.88</td>
+          </tr>
+          <tr>
+            <td>Weibull AFT</td>
+            <td>14215.99</td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <p>
+        Since a smaller AIC indicates a better fit, the Log-Normal AFT model performed best
+        among the three candidates. The AFT results were broadly consistent with the Cox model:
+        online backup and tech support were associated with longer customer survival time.
+      </p>
+    
+      <figure>
+        <img src="figs/aft_survival_curves.png" alt="Predicted survival curves from AFT models">
+        <figcaption>Predicted survival curves from Weibull, Log-Normal, and Log-Logistic AFT models.</figcaption>
+      </figure>
+    </section>
+    
+    <section>
+      <h2>Main Findings</h2>
+      <ul>
+        <li>The median customer survival time in the filtered subgroup was about 34 months.</li>
+        <li>Service-related variables such as online backup, online security, and tech support were strongly associated with customer retention.</li>
+        <li>Paperless billing was associated with a slightly higher churn risk in the Cox model.</li>
+        <li>The Cox model provided interpretable hazard ratios, while AFT models provided a complementary time-ratio perspective.</li>
+        <li>Among the tested AFT models, the Log-Normal AFT model achieved the lowest AIC.</li>
+      </ul>
+    </section>
 
       <h2>Text-to-SQL Experiments</h2>
       <p>
-        In the second part of the project, I created a MySQL database and evaluated whether an LLM could generate
-        correct SQL from natural language questions. The model successfully handled some simple aggregation tasks,
-        but it also failed on more complex analytical queries.
+        In the second part of the project, I created a MySQL database named
+        <code>survival_analysis_q23</code> and imported the Telco Customer Churn dataset
+        into a table named <code>telco_customer_churn</code>. I then used an LLM to generate
+        SQL queries from natural language questions and compared the generated SQL with
+        manually corrected SQL.
       </p>
+      
       <p>
-        Three representative failure patterns were observed:
+        The model was able to handle simple aggregation questions, such as computing
+        average tenure by internet service type. However, it became less reliable when
+        the query involved categorical value semantics, grouped median calculation, or
+        nested aggregation baselines.
+      </p>m
+
+      <h2>Website Deployment</h2>
+      <p>
+        This blog was deployed using GitHub Pages with a custom domain obtained through
+        the GitHub Student Developer Pack. The repository used for deployment is
+        <code>yuke1010.github.io</code>, and the custom domain is
+        <strong>www.yuke1010.page</strong>.
       </p>
-      <ul>
-        <li>misunderstanding the semantics of categorical values,</li>
-        <li>producing corrupted or unstable structured SQL output,</li>
-        <li>using incorrect subgroup baselines in nested aggregation queries.</li>
-      </ul>
+      
+      <p>
+        I configured the custom domain in the GitHub Pages settings and added DNS records
+        in Name.com, including a CNAME record for the <code>www</code> subdomain and
+        GitHub Pages A records for the apex domain. After DNS propagation, the blog was
+        successfully published with HTTPS enabled.
+      </p>
 
       <h2>What I Learned</h2>
       <p>
